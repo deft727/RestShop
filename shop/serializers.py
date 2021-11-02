@@ -3,6 +3,7 @@ from .models import *
 
 
 class CategorySerializer(serializers.ModelSerializer):
+
     name = serializers.CharField(required=True)
     slug = serializers.SlugField()
 
@@ -14,6 +15,7 @@ class CategorySerializer(serializers.ModelSerializer):
 
 
 class BaseProductSerializer:
+
     category = serializers.PrimaryKeyRelatedField(queryset=Category.objects)
     title = serializers.CharField(required=True)
     slug = serializers.SlugField(required=True)
@@ -23,6 +25,7 @@ class BaseProductSerializer:
 
 
 class SmartphoneSerializer(BaseProductSerializer,serializers.ModelSerializer):
+
     diagonal = serializers.CharField(required=True)
     display_type = serializers.CharField(required=True)
     resolution = serializers.CharField(required=True)
@@ -46,3 +49,19 @@ class NotebookSerializer(BaseProductSerializer,serializers.ModelSerializer):
     ram = serializers.CharField(required=True)
     video = serializers.CharField(required=True)
     time_without_charge = serializers.CharField(required=True)
+
+
+class OrderSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Order
+        fields = '__all__'
+
+
+class CustomerSerializer(serializers.ModelSerializer):
+
+    orders = OrderSerializer(many=True)
+
+    class Meta:
+        model = Customer
+        fields = '__all__'
