@@ -24,7 +24,7 @@ class BaseProductSerializer:
     price = serializers.DecimalField(max_digits=9, decimal_places=2, required=True)
 
 
-class SmartphoneSerializer(BaseProductSerializer,serializers.ModelSerializer):
+class SmartphoneSerializer(BaseProductSerializer, serializers.ModelSerializer):
 
     diagonal = serializers.CharField(required=True)
     display_type = serializers.CharField(required=True)

@@ -1,4 +1,5 @@
 from rest_framework.generics import ListAPIView, RetrieveAPIView
+from .paginations import CategoryPagination
 from .serializers import CategorySerializer,\
                         SmartphoneSerializer,\
                         NotebookSerializer,\
@@ -11,6 +12,7 @@ class CategoryListApiView(ListAPIView):
 
     serializer_class = CategorySerializer
     queryset = Category.objects.all()
+    pagination_class = CategoryPagination
 
 
 class SmartphoneListApiView(ListAPIView):
