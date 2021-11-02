@@ -36,3 +36,13 @@ class SmartphoneSerializer(BaseProductSerializer,serializers.ModelSerializer):
     class Meta:
         model = Smartphone
         fields = '__all__'
+
+
+class NotebookSerializer(BaseProductSerializer,serializers.ModelSerializer):
+
+    diagonal = serializers.CharField(required=True)
+    display_type = serializers.CharField(required=True)
+    processor_freq = serializers.CharField(required=True)
+    ram = serializers.CharField(required=True)
+    video = serializers.CharField(required=True)
+    time_without_charge = serializers.CharField(required=True)

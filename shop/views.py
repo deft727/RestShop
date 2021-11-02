@@ -1,5 +1,5 @@
-from rest_framework.generics import ListAPIView
-from .serializers import CategorySerializer, SmartphoneSerializer
+from rest_framework.generics import ListAPIView, RetrieveAPIView
+from .serializers import CategorySerializer, SmartphoneSerializer ,NotebookSerializer
 from .models import *
 from rest_framework.filters import SearchFilter
 
@@ -25,3 +25,18 @@ class SmartphoneListApiView(ListAPIView):
     #         search_params = {'price__iexact': price, 'title__iexact':title}
     #         return qs.filter(**search_params)
     #     return qs
+
+
+class NotebookListApiView(ListAPIView):
+
+    serializer_class = NotebookSerializer
+    queryset = Notebook.objects.all()
+    filter_backends = [SearchFilter]
+    search_field = ['price', 'title']
+
+
+class SmartphoneDetail(RetrieveAPIView):
+
+    serializer_class = SmartphoneSerializer
+    queryset = Smartphone.objects.all()
+    lookup_field = 'id'
